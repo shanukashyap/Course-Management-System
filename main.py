@@ -1,22 +1,25 @@
+from models.user import User
 from models.student import Student
 from models.mentor import Mentor
-from models.course import Course
-from services.course_manager import CourseManagementSystem
-
-
-def demonstrate_polymorphism(users):
-    print("\n========== POLYMORPHISM DEMO ==========")
-
-    for user in users:
-        print(f"{user.name}: {user.get_role()}")
-
-    print("=" * 40)
 
 
 def main():
-    system = CourseManagementSystem()
 
-    # Create users
+    print("========================================")
+    print("   USER DOMAIN MODEL DEMONSTRATION")
+    print("========================================")
+
+    # Static method demonstration
+    print("\n--- STATIC METHOD ---")
+
+    email = "student@example.com"
+
+    print(
+        f"Is '{email}' valid?",
+        User.validate_email(email)
+    )
+
+    # Create Student
     student = Student(
         "S001",
         "Urmil Kashyap",
@@ -24,6 +27,7 @@ def main():
         "Intermediate"
     )
 
+    # Create Mentor
     mentor = Mentor(
         "M001",
         "Rahul Sharma",
@@ -31,58 +35,37 @@ def main():
         "Python and Generative AI"
     )
 
-    # Create course
-    course = Course(
-        "C001",
-        "Python and Generative AI",
-        mentor,
-        capacity=30
-    )
+    # Instance methods
+    print("\n--- INSTANCE METHODS ---")
 
-    # Register users and course
-    system.add_student(student)
-    system.add_mentor(mentor)
-    system.add_course(course)
-
-    # Static method demonstration
-    print("\n========== STATIC METHOD ==========")
-
-    print(
-        "Valid email:",
-        UserEmailDemo.validate_email("student@example.com")
-    )
-
-    # Enrollment
-    enrollment = system.enroll_student("S001", "C001")
-
-    # Display information
     student.display_profile()
     mentor.display_profile()
-    course.display_course()
-    enrollment.display_enrollment()
 
-    system.show_students()
-    system.show_mentors()
-    system.show_courses()
-    system.show_enrollments()
+    # Polymorphism demonstration
+    print("\n--- POLYMORPHISM ---")
 
-    # Polymorphism
-    demonstrate_polymorphism([student, mentor])
+    users = [student, mentor]
 
-    # Class method
-    print("\n========== CLASS METHOD ==========")
+    for user in users:
+        print(
+            f"{user.name} -> {user.get_role()}"
+        )
+
+    # Class method demonstration
+    print("\n--- CLASS METHOD ---")
+
     print(
         "Total users created:",
-        Student.get_user_count()
+        User.get_user_count()
     )
 
+    # Encapsulation demonstration
+    print("\n--- ENCAPSULATION ---")
 
-class UserEmailDemo:
-    """Small helper for demonstrating a static method."""
-
-    @staticmethod
-    def validate_email(email):
-        return "@" in email and "." in email.split("@")[-1]
+    print("Student ID:", student.user_id)
+    print("Student Name:", student.name)
+    print("Student Email:", student.email)
+    print("Student Level:", student.student_level)
 
 
 if __name__ == "__main__":
