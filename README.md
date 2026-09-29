@@ -669,9 +669,11 @@ https://github.com/shanukashyap/Course-Management-System
 
 ---
 
-# Video Demonstration
+# Video Demonstration link
 
-The project demonstration video covers:
+https://youtu.be/jFfRSUBTG0M
+
+
 
 1. Problem statement
 2. Project architecture
